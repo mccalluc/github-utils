@@ -16,6 +16,7 @@ def api_get(path_template, *keys):
   
 def api_delete(path_template, *keys):
   url = api_url(path_template, keys)
+  print 'delete: %s' % url
   requests.delete(url, auth=(username, password))
   
 
@@ -35,6 +36,6 @@ for repo in repos:
   if labeled_issues:
     print 'Labels are already in use on issues in %s. Deleting them would be destructive.'
     sys.exit(1)
-  # for label in labels:
-  #   api_delete('https://api.github.com/repos/%s/%s/labels/%s', team, repo, label)
+  for label in labels:
+    api_delete('/repos/%s/%s/labels/%s', team, repo, label)
   
