@@ -33,8 +33,8 @@ for repo in repos:
   labels = map(lambda label_info: label_info['name'], api_get('/repos/%s/%s/labels', team, repo))
   print 'labels: %s' % labels
   labeled_issues = api_get('/repos/%s/%s/issues?filter=all&state=all&labels=%s', team, repo, ','.join(labels))
-  if labeled_issues:
-    print 'Labels are already in use on issues in %s. Deleting them would be destructive.'
+  if labels and labeled_issues:
+    print 'Labels are already in use on issues in %s: %s. Deleting them would be destructive.' % (repo, labeled_issues)
     sys.exit(1)
   for label in labels:
     api_delete('/repos/%s/%s/labels/%s', team, repo, label)
