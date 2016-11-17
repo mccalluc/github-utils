@@ -8,7 +8,7 @@ import requests
 
 def api_url(path_template, keys):
   # print path_template % tuple(map(urllib.quote_plus, keys))
-  return 'https://api.github.com' + path_template % tuple(map(urllib.quote_plus, keys))
+  return 'https://api.github.com' + path_template % tuple(map(urllib.quote, keys))
 
 def api_get(path_template, *keys):
   url = api_url(path_template, keys)
